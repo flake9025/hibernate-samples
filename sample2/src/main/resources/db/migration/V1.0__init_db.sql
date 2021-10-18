@@ -1,0 +1,6 @@
+CREATE TABLE persons (
+    id IDENTITY NOT NULL PRIMARY KEY,
+    firstname VARCHAR NOT NULL,
+    lastname VARCHAR NOT NULL,
+    birthday TIMESTAMP WITH TIME ZONE NOT NULL
+);
