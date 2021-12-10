@@ -18,5 +18,6 @@ public interface PersonneMapper {
     Personne mapToModel(PersonneDTO dto);
 
     @InheritConfiguration
+    @Mapping(target = "vehicle", ignore = true)
     void updateModel(@MappingTarget Personne model, PersonneDTO dto);
 }
