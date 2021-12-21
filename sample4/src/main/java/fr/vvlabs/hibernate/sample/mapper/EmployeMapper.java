@@ -11,8 +11,8 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface EmployeMapper {
 
-    @Mapping(target = "employer", source = "id.employeur")
-    @Mapping(target = "person", source = "id.personne")
+    @Mapping(target = "employer", source = "employeur")
+    @Mapping(target = "person", source = "personne")
     EmployeDTO mapToDto(Employe model);
 
     @InheritInverseConfiguration

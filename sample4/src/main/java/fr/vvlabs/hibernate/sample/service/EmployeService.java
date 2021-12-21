@@ -50,13 +50,13 @@ public class EmployeService {
 
     @Transactional(readOnly = true)
     public EmployeDTO findById(Integer employerId, Integer personId) throws SampleException {
-        return repository.findByIdEmployeurIdAndIdPersonneId(employerId, personId)
+        return repository.findByEmployeurIdAndPersonneId(employerId, personId)
             .map(mapper::mapToDto).orElseThrow(() -> new SampleException("not found"));
     }
 
     @Transactional(readOnly = true)
     public boolean existsById(Integer employerId, Integer personId) {
-        return repository.existsByIdEmployeurIdAndIdPersonneId(employerId, personId);
+        return repository.existsByEmployeurIdAndPersonneId(employerId, personId);
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -68,7 +68,7 @@ public class EmployeService {
 
     @Transactional(rollbackFor = Exception.class)
     public EmployeId update(final Integer employerId, final Integer personId, final EmployeDTO dto) throws SampleException {
-        Optional<Employe> optionalModel = repository.findByIdEmployeurIdAndIdPersonneId(employerId, personId);
+        Optional<Employe> optionalModel = repository.findByEmployeurIdAndPersonneId(employerId, personId);
         EmployeId key = null;
         if (optionalModel.isPresent()) {
             Employe employe = optionalModel.get();
@@ -87,22 +87,26 @@ public class EmployeService {
 
     @Transactional
     public void deleteById(final Integer employerId, final Integer personId) {
-        repository.deleteByIdEmployeurIdAndIdPersonneId(employerId, personId);
+        repository.deleteByEmployeurIdAndPersonneId(employerId, personId);
     }
 
     private Employe updateLinks(EmployeDTO dto, Employe employe) throws SampleException {
         EmployeId id = new EmployeId();
         // chargement de l'employeur
         if(dto.getEmployer() != null && dto.getEmployer().getId() > 0) {
-            Employeur employeur = employeurRepository.findById(dto.getEmployer().getId())
-                .orElseThrow(() -> new SampleException("Employer " + dto.getEmployer().getId() + " not found !"));
-            id.setEmployeur(employeur);
+            if(employeurRepository.existsById(dto.getEmployer().getId())){
+                id.setEmployeurId(dto.getEmployer().getId());
+            }else{
+                throw new SampleException("Employer " + dto.getEmployer().getId() + " not found !");
+            }
         }
         // chargement de la personne
         if(dto.getPerson() != null && dto.getPerson().getId() > 0) {
-            Personne personne = personneRepository.findById(dto.getPerson().getId())
-                .orElseThrow(() -> new SampleException("Person " + dto.getPerson().getId() + " not found !"));
-            id.setPersonne(personne);
+            if(personneRepository.existsById(dto.getPerson().getId())){
+                id.setPersonneId(dto.getPerson().getId());
+            }else{
+                throw new SampleException("Person " + dto.getPerson().getId() + " not found !");
+            }
         }
         return repository.save(employe);
     }

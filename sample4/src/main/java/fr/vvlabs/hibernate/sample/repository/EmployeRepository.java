@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployeRepository extends JpaRepository<Employe, EmployeId> {
 
-  Optional<Employe> findByIdEmployeurIdAndIdPersonneId(Integer employeurId, Integer employeId);
+  Optional<Employe> findByEmployeurIdAndPersonneId(Integer employeurId, Integer employeId);
 
-  boolean existsByIdEmployeurIdAndIdPersonneId(Integer employeurId, Integer employeId);
+  boolean existsByEmployeurIdAndPersonneId(Integer employeurId, Integer employeId);
 
-  void deleteByIdEmployeurIdAndIdPersonneId(Integer employeurId, Integer employeId);
+  void deleteByEmployeurIdAndPersonneId(Integer employeurId, Integer employeId);
 }

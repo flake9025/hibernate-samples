@@ -46,10 +46,10 @@ public class Employe {
 
     @ManyToOne
     @JoinColumn(name = "employer_id")
-    private Employeur employeur;
+    private int employeurId; // ou Employeur employeur;
 
     @ManyToOne
     @JoinColumn(name = "person_id")
-    private Personne personne;
+    private int personneId; // ou Personne personne;
   }
 }
