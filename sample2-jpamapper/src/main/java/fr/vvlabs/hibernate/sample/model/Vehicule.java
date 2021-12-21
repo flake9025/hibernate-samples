@@ -1,5 +1,6 @@
 package fr.vvlabs.hibernate.sample.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Table(name = "vehicles")
@@ -21,7 +23,7 @@ public class Vehicule implements BaseEntity {
     private int id;
     @Column(name = "model")
     private String modele;
-    @OneToOne(mappedBy = "vehicule")
+    @OneToOne(mappedBy = "vehicule", cascade = CascadeType.ALL)
     private Personne proprietaire;
 
 }

@@ -4,7 +4,7 @@ import fr.vvlabs.hibernate.sample.dto.PersonneDTO;
 import fr.vvlabs.hibernate.sample.model.Personne;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = VehiculeMapper.class)
 public interface PersonneMapper {
 
     @Mapping(target = "firstName", source = "prenom")

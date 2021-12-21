@@ -7,6 +7,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
@@ -27,15 +28,13 @@ public class Employe {
   @Column(name = "badge")
   private String badge;
 
-  @Transient
-  public Employeur getEmployeur() {
-    return getId().getEmployeur();
-  }
+  @ManyToOne
+  @MapsId("employer_id")
+  private Employeur employeur;
 
-  @Transient
-  public Personne getPersonne() {
-    return getId().getPersonne();
-  }
+  @ManyToOne
+  @MapsId("person_id")
+  private Personne personne;
 
   @Embeddable
   @Data

@@ -10,4 +10,5 @@ public class PersonneDTO {
     private String firstName;
     private String lastName;
     private ZonedDateTime birthDay;
+    private VehiculeDTO vehicule;
 }
