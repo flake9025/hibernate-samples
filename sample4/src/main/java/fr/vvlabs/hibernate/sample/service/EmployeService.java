@@ -108,6 +108,7 @@ public class EmployeService {
                 throw new SampleException("Person " + dto.getPerson().getId() + " not found !");
             }
         }
+        employe.setId(id);
         return repository.save(employe);
     }
 }

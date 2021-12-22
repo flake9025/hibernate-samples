@@ -29,11 +29,13 @@ public class Employe {
   private String badge;
 
   @ManyToOne
-  @MapsId("employer_id")
+  @MapsId("employeurId")
+  @JoinColumn(name = "employer_id")
   private Employeur employeur;
 
   @ManyToOne
-  @MapsId("person_id")
+  @MapsId("personneId")
+  @JoinColumn(name = "person_id")
   private Personne personne;
 
   @Embeddable
@@ -44,12 +46,10 @@ public class Employe {
   @EqualsAndHashCode
   public static class EmployeId implements Serializable {
 
-    @ManyToOne
-    @JoinColumn(name = "employer_id")
-    private int employeurId; // ou Employeur employeur;
+    @Column(name = "employer_id")
+    private int employeurId;
 
-    @ManyToOne
-    @JoinColumn(name = "person_id")
-    private int personneId; // ou Personne personne;
+    @Column(name = "person_id")
+    private int personneId;
   }
 }
